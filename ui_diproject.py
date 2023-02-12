@@ -15,15 +15,15 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QFormLayout, QGridLayout, QHBoxLayout,
-    QLabel, QListView, QPushButton, QSizePolicy,
-    QTextEdit, QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QGridLayout, QHBoxLayout, QLabel,
+    QListView, QPushButton, QSizePolicy, QTextEdit,
+    QVBoxLayout, QWidget)
 
 class Ui_Form(object):
     def setupUi(self, Form):
         if not Form.objectName():
             Form.setObjectName(u"Form")
-        Form.resize(1047, 753)
+        Form.resize(1047, 873)
         self.verticalLayoutWidget = QWidget(Form)
         self.verticalLayoutWidget.setObjectName(u"verticalLayoutWidget")
         self.verticalLayoutWidget.setGeometry(QRect(10, 12, 1021, 711))
@@ -87,6 +87,21 @@ class Ui_Form(object):
 
         self.verticalLayout.addLayout(self.gridLayout)
 
+        self.horizontalLayout_2 = QHBoxLayout()
+        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
+        self.pushButton_3 = QPushButton(self.verticalLayoutWidget)
+        self.pushButton_3.setObjectName(u"pushButton_3")
+
+        self.horizontalLayout_2.addWidget(self.pushButton_3)
+
+        self.pushButton_4 = QPushButton(self.verticalLayoutWidget)
+        self.pushButton_4.setObjectName(u"pushButton_4")
+
+        self.horizontalLayout_2.addWidget(self.pushButton_4)
+
+
+        self.verticalLayout.addLayout(self.horizontalLayout_2)
+
         self.listView_2 = QListView(self.verticalLayoutWidget)
         self.listView_2.setObjectName(u"listView_2")
 
@@ -97,20 +112,32 @@ class Ui_Form(object):
 
         self.verticalLayout.addWidget(self.listView)
 
-        self.formLayout = QFormLayout()
-        self.formLayout.setObjectName(u"formLayout")
+        self.gridLayout_2 = QGridLayout()
+        self.gridLayout_2.setObjectName(u"gridLayout_2")
         self.pushButton = QPushButton(self.verticalLayoutWidget)
         self.pushButton.setObjectName(u"pushButton")
+        sizePolicy1 = QSizePolicy(QSizePolicy.Maximum, QSizePolicy.Fixed)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.pushButton.sizePolicy().hasHeightForWidth())
+        self.pushButton.setSizePolicy(sizePolicy1)
 
-        self.formLayout.setWidget(0, QFormLayout.LabelRole, self.pushButton)
+        self.gridLayout_2.addWidget(self.pushButton, 0, 0, 1, 1)
 
         self.pushButton_2 = QPushButton(self.verticalLayoutWidget)
         self.pushButton_2.setObjectName(u"pushButton_2")
+        sizePolicy1.setHeightForWidth(self.pushButton_2.sizePolicy().hasHeightForWidth())
+        self.pushButton_2.setSizePolicy(sizePolicy1)
 
-        self.formLayout.setWidget(0, QFormLayout.FieldRole, self.pushButton_2)
+        self.gridLayout_2.addWidget(self.pushButton_2, 0, 1, 1, 1)
+
+        self.pushButton_5 = QPushButton(self.verticalLayoutWidget)
+        self.pushButton_5.setObjectName(u"pushButton_5")
+
+        self.gridLayout_2.addWidget(self.pushButton_5, 0, 2, 1, 1)
 
 
-        self.verticalLayout.addLayout(self.formLayout)
+        self.verticalLayout.addLayout(self.gridLayout_2)
 
         self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout.setObjectName(u"horizontalLayout")
@@ -119,6 +146,8 @@ class Ui_Form(object):
 
 
         self.retranslateUi(Form)
+        self.pushButton_2.clicked.connect(self.listView.clearSelection)
+        self.pushButton_5.clicked.connect(self.listView.reset)
 
         QMetaObject.connectSlotsByName(Form)
     # setupUi
@@ -130,7 +159,10 @@ class Ui_Form(object):
         self.label_4.setText(QCoreApplication.translate("Form", u"Numero", None))
         self.label_6.setText(QCoreApplication.translate("Form", u"Ciudad", None))
         self.label_3.setText(QCoreApplication.translate("Form", u"Calle", None))
-        self.pushButton.setText(QCoreApplication.translate("Form", u"PushButton", None))
-        self.pushButton_2.setText(QCoreApplication.translate("Form", u"PushButton", None))
+        self.pushButton_3.setText(QCoreApplication.translate("Form", u"Enviar", None))
+        self.pushButton_4.setText(QCoreApplication.translate("Form", u"Cancelar", None))
+        self.pushButton.setText(QCoreApplication.translate("Form", u"Guardar", None))
+        self.pushButton_2.setText(QCoreApplication.translate("Form", u"Eliminar seleccion", None))
+        self.pushButton_5.setText(QCoreApplication.translate("Form", u"Eliminar todo", None))
     # retranslateUi
 
