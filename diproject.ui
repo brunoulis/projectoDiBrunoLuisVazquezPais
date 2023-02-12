@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1047</width>
-    <height>753</height>
+    <height>873</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -83,6 +83,24 @@
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QPushButton" name="pushButton_3">
+        <property name="text">
+         <string>Enviar</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_4">
+        <property name="text">
+         <string>Cancelar</string>
         </property>
        </widget>
       </item>
