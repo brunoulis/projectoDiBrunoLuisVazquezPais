@@ -1,2 +1,0 @@
-""" Sera un projecto con qtpyside6 en el cual utilizaremos el modelo MVC para crear una aplicacion de escritorio. 
-En la cual despues de poner una direccion (calle, piso, puerta) nos devolvera todos los trabajos efectuados en esa direccion"""
