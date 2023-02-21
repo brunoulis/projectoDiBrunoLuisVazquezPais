@@ -6,7 +6,7 @@ API_KEY = "AIzaSyBCsWQFnT-3NO4z7xfxbDceGgmGRjNDUa4"
 
 
 def find_address(adress: str) -> dict:
-    """esta funcion recibe la ubicacion dada y
+    """esta funcion recibe la ubicacion que recibe de los text edit y
     haciendo uso de la API GEOCODING
     (https://developers.google.com/maps/documentation/geocoding/start?hl=es-419) de google maps
     obtenemos la latitud y longitud de la ubicacion propocionada
