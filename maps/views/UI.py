@@ -28,7 +28,7 @@ class Ui_Form(object):
     
     
     def setupUi(self, Form):
-        self.data={}
+        self.data=[]
         self.load_csv()
         
         #!Creacion de Base de Datos y Tabla
@@ -277,12 +277,14 @@ class Ui_Form(object):
         self.textEdit_2.setText("")
 
     def load_csv(self):
-        # cargamos los datos del csv y cogemos los valores de la columna NEXEVIA y la NOMVIA
-        with open('data.csv', 'r') as file:
-            reader = csv.reader(file)
-            next(reader)
-            for row in reader:
-                self.data.append(row)
+        pathdata=os.path.join(os.path.dirname(__file__),'data.csv')
+        with open(pathdata,encoding='utf-8')as archivo:
+            #intentaremos evitar el error unicodeDecodeError: 'charmap' codec can't decode byte 0x81 in position 0: character maps to <undefined>
+            datos=csv.DictReader(archivo,delimiter=';')
+            for row in datos:
+            #guardamos los valores de TIPUSVIA,NEXEVIA y NOMVIA en una lista
+                self.data.append(row['NOMMUNI']+row['TIPUSVIA']+' '+row['NEXEVIA']+' '+row['NOMVIA'])
+    
                 
                 
         
