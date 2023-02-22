@@ -1,6 +1,6 @@
 from PySide6.QtWebEngineWidgets import QWebEngineView
 from PySide6.QtCore import QCoreApplication, QMetaObject, QRect, Qt,QStringListModel
-from PySide6.QtWidgets import QMainWindow,QApplication,QCompleter,QComboBox,QGridLayout, QHBoxLayout, QLabel, QListWidget, QListWidgetItem, QPushButton, QSizePolicy, QTextEdit, QVBoxLayout, QWidget
+from PySide6.QtWidgets import QMainWindow,QApplication,QCompleter,QComboBox,QGridLayout, QHBoxLayout, QLabel, QListWidget, QListWidgetItem, QPushButton, QSizePolicy, QLineEdit, QVBoxLayout, QWidget
 from PySide6.QtGui import QMouseEvent,QStandardItemModel,QStandardItem,QTextCursor, QTextDocument, QTextCharFormat
 
 
@@ -9,14 +9,14 @@ class MainWindow(QMainWindow):
         super().__init__()
 
         # Lista de palabras para autocompletar
-        self.words = ['auto', 'bicicleta', 'camión', 'moto', 'triciclo', 'van']
+        self.words = ['Coche', 'bicicleta', 'camión', 'moto', 'triciclo', 'van']
 
         # Crear modelo para el autocompletado
         self.model = QStringListModel()
         self.model.setStringList(self.words)
 
-        # Crear QTextEdit para la entrada de texto
-        self.text_edit = QTextEdit(self)
+        # Crear QLineEdit para la entrada de texto
+        self.text_edit = QLineEdit(self)
         self.text_edit.setGeometry(50, 50, 200, 200)
 
         # Configurar el autocompletado
@@ -26,7 +26,7 @@ class MainWindow(QMainWindow):
         completer.activated.connect(self.insert_completion)
         self.text_edit.setCompleter(completer)
 
-        # Agregar QTextEdit a la ventana principal
+        # Agregar QLineEdit a la ventana principal
         self.setCentralWidget(self.text_edit)
 
     def insert_completion(self, completion):
