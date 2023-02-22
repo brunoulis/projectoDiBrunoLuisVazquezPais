@@ -26,7 +26,10 @@ class Ui_Form(object):
     searches = []
     con = QSqlDatabase.addDatabase("QSQLITE")
     
+    
     def setupUi(self, Form):
+        self.data={}
+        self.load_csv()
         
         #!Creacion de Base de Datos y Tabla
         self.con.setDatabaseName(os.path.join(os.path.dirname(__file__), "mapsDB.sqlite"))
@@ -209,7 +212,7 @@ class Ui_Form(object):
         self.retranslateUi(Form)
         #Conectamos los botones con las funciones
         QMetaObject.connectSlotsByName(Form)
-        self.data={}
+        
     
 
     def buscar_direcion(self):
@@ -279,12 +282,11 @@ class Ui_Form(object):
             reader = csv.reader(file)
             next(reader)
             for row in reader:
-                #CODMUNI;NOMMUNI;TIPUSVIA;NEXEVIA;NOMVIA;NOMCVIA;DATAINFO
-                #agarramos los valores de la columna NEXEVIA y la NOMVIA
-                self.data[row[3]] = row[4]
+                self.data.append(row)
+                
                 
         
-            
+   
 
 
     def retranslateUi(self, Form):
