@@ -13,7 +13,7 @@ import io
 import os
 import csv
 from PySide6.QtWebEngineWidgets import QWebEngineView
-from PySide6.QtCore import QCoreApplication, QMetaObject, QRect, Qt
+from PySide6.QtCore import QCoreApplication, QMetaObject, QRect, Qt,QStringListModel
 from PySide6.QtWidgets import QCompleter,QComboBox,QGridLayout, QHBoxLayout, QLabel, QListWidget, QListWidgetItem, QPushButton, QSizePolicy, QTextEdit, QVBoxLayout, QWidget
 from PySide6.QtGui import QMouseEvent,QStandardItemModel,QStandardItem
 from service.API_maps import find_address
@@ -28,7 +28,7 @@ class Ui_Form(object):
     
     
     def setupUi(self, Form):
-        self.data=QStandardItemModel()
+        self.data=[]
         self.load_csv()
         
         #!Creacion de Base de Datos y Tabla
@@ -56,10 +56,9 @@ class Ui_Form(object):
 
         self.gridLayout_4 = QGridLayout()
         self.gridLayout_4.setObjectName(u"gridLayout_4")
+        self.model=QStringListModel()
+        self.model.setStringList(self.data)
         self.textEdit_3 = QTextEdit(self.horizontalLayoutWidget)
-
-        #Configurar el autocompletado
-        completer = QCompleter(self.data)
         self.textEdit_3.setObjectName(u"textEdit_3")
         sizePolicy = QSizePolicy(
             QSizePolicy.MinimumExpanding, QSizePolicy.Maximum)
@@ -69,7 +68,12 @@ class Ui_Form(object):
             self.textEdit_3.sizePolicy().hasHeightForWidth())
         self.textEdit_3.setSizePolicy(sizePolicy)
         self.textEdit_3.setLayoutDirection(Qt.LeftToRight)
-
+        #Configurar el autocompletado
+        completer = QCompleter(self.model, self.textEdit_3)
+        completer.setCaseSensitivity(Qt.CaseInsensitive)
+        completer.setFilterMode(Qt.MatchContains)
+        completer.activated.connect(self.insert_completion)
+        self.textEdit_3.setCompleter(completer)
         self.gridLayout_4.addWidget(self.textEdit_3, 1, 1, 1, 1)
 
         self.label_5 = QLabel(self.horizontalLayoutWidget)
