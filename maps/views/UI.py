@@ -283,7 +283,7 @@ class Ui_Form(object):
             datos=csv.DictReader(archivo,delimiter=';')
             for row in datos:
             #guardamos los valores de TIPUSVIA,NEXEVIA y NOMVIA en una lista
-                self.data.append(row['NOMMUNI']+row['TIPUSVIA']+' '+row['NEXEVIA']+' '+row['NOMVIA'])
+                self.data.append( row['TIPUSVIA']+' '+row['NEXEVIA']+' '+row['NOMVIA'])
     
                 
                 
