@@ -14,7 +14,7 @@ import os
 import csv
 from PySide6.QtWebEngineWidgets import QWebEngineView
 from PySide6.QtCore import QCoreApplication, QMetaObject, QRect, Qt,QStringListModel
-from PySide6.QtWidgets import QCompleter,QComboBox,QGridLayout, QHBoxLayout, QLabel, QListWidget, QListWidgetItem, QPushButton, QSizePolicy, QTextEdit, QVBoxLayout, QWidget
+from PySide6.QtWidgets import QLineEdit,QCompleter,QComboBox,QGridLayout, QHBoxLayout, QLabel, QListWidget, QListWidgetItem, QPushButton, QSizePolicy, QTextEdit, QVBoxLayout, QWidget
 from PySide6.QtGui import QMouseEvent,QStandardItemModel,QStandardItem,QTextCursor, QTextDocument, QTextCharFormat
 from service.API_maps import find_address
 from PySide6.QtSql import QSqlDatabase, QSqlQuery, QSqlQueryModel
@@ -58,23 +58,23 @@ class Ui_Form(object):
         self.gridLayout_4.setObjectName(u"gridLayout_4")
         self.model=QStringListModel()
         self.model.setStringList(self.data)
-        self.textEdit_3 = QTextEdit(self.horizontalLayoutWidget)
-        self.textEdit_3.setObjectName(u"textEdit_3")
+        self.lineEdit_3 = QLineEdit(self.horizontalLayoutWidget)
+        self.lineEdit_3.setObjectName(u"lineEdit_3")
         sizePolicy = QSizePolicy(
             QSizePolicy.MinimumExpanding, QSizePolicy.Maximum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(
-            self.textEdit_3.sizePolicy().hasHeightForWidth())
-        self.textEdit_3.setSizePolicy(sizePolicy)
-        self.textEdit_3.setLayoutDirection(Qt.LeftToRight)
+            self.lineEdit_3.sizePolicy().hasHeightForWidth())
+        self.lineEdit_3.setSizePolicy(sizePolicy)
+        self.lineEdit_3.setLayoutDirection(Qt.LeftToRight)
         #Configurar el autocompletado
-        completer = QCompleter(self.model, self.textEdit_3)
+        completer = QCompleter(self.model, self.lineEdit_3)
         completer.setCaseSensitivity(Qt.CaseInsensitive)
         completer.setFilterMode(Qt.MatchContains)
         completer.activated.connect(self.insert_completion)
-        self.textEdit_3.setCompleter(completer)
-        self.gridLayout_4.addWidget(self.textEdit_3, 1, 1, 1, 1)
+        self.lineEdit_3.setCompleter(completer)
+        self.gridLayout_4.addWidget(self.lineEdit_3, 1, 1, 1, 1)
 
         self.label_5 = QLabel(self.horizontalLayoutWidget)
         self.label_5.setObjectName(u"label_5")
@@ -223,7 +223,7 @@ class Ui_Form(object):
 
     def buscar_direcion(self):
         city = self.comboboxname.currentText()
-        street = self.textEdit_3.toPlainText()
+        street = self.lineEdit_3.toPlainText()
         number = self.textEdit.toPlainText()
         floor = self.textEdit_2.toPlainText()
         addres = f"{city} {street} {number} {floor}".lower()
@@ -278,7 +278,7 @@ class Ui_Form(object):
 
     def format_form(self):
         self.comboboxname.setCurrentIndex(0)
-        self.textEdit_3.setText("")
+        self.lineEdit_3.setText("")
         self.textEdit.setText("")
         self.textEdit_2.setText("")
 
@@ -291,10 +291,10 @@ class Ui_Form(object):
             #guardamos los valores de TIPUSVIA,NEXEVIA y NOMVIA en una lista
                 self.data.append( row['TIPUSVIA']+' '+row['NEXEVIA']+' '+row['NOMVIA'])
     
-    def inser_completion(self, completion):
+    def insert_completion(self, completion):
         # Obtener el cursor actual y el documento de texto
-        cursor = self.textEdit_3.textCursor()
-        document=self.textEdit_3.document()
+        cursor = self.lineEdit_3.textCursor()
+        document=self.lineEdit_3.document()
         # Obtener la posición del cursor y retroceder para encontrar el inicio de la palabra actual
         pos=cursor.position()
         cursor.movePosition(QTextCursor.StartOfWord, QTextCursor.MoveAnchor)
