@@ -14,8 +14,8 @@ import os
 import csv
 from PySide6.QtWebEngineWidgets import QWebEngineView
 from PySide6.QtCore import QCoreApplication, QMetaObject, QRect, Qt
-from PySide6.QtWidgets import QComboBox,QGridLayout, QHBoxLayout, QLabel, QListWidget, QListWidgetItem, QPushButton, QSizePolicy, QTextEdit, QVBoxLayout, QWidget
-from PySide6.QtGui import QMouseEvent
+from PySide6.QtWidgets import QCompleter,QComboBox,QGridLayout, QHBoxLayout, QLabel, QListWidget, QListWidgetItem, QPushButton, QSizePolicy, QTextEdit, QVBoxLayout, QWidget
+from PySide6.QtGui import QMouseEvent,QStandardItemModel,QStandardItem
 from service.API_maps import find_address
 from PySide6.QtSql import QSqlDatabase, QSqlQuery, QSqlQueryModel
 from component.map import create_map
@@ -28,7 +28,7 @@ class Ui_Form(object):
     
     
     def setupUi(self, Form):
-        self.data=[]
+        self.data=QStandardItemModel()
         self.load_csv()
         
         #!Creacion de Base de Datos y Tabla
@@ -57,7 +57,9 @@ class Ui_Form(object):
         self.gridLayout_4 = QGridLayout()
         self.gridLayout_4.setObjectName(u"gridLayout_4")
         self.textEdit_3 = QTextEdit(self.horizontalLayoutWidget)
-        #Cuando se escriba en el textEdit_3 se ejecutara la funcion find_address
+
+        #Configurar el autocompletado
+        completer = QCompleter(self.data)
         self.textEdit_3.setObjectName(u"textEdit_3")
         sizePolicy = QSizePolicy(
             QSizePolicy.MinimumExpanding, QSizePolicy.Maximum)
