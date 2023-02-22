@@ -85,7 +85,7 @@ class Ui_Form(object):
         self.gridLayout_4.addWidget(self.textEdit, 2, 1, 1, 1)
 
         self.comboBox = QComboBox(self.horizontalLayoutWidget)
-        self.comboBox.addItems(["", ""])
+        self.comboBox.addItems(["Badalona", "Barcelona" ,"L'Hospitalet de Llobregat","Sabadell", "Castelldefels"])
         self.comboBox.setObjectName(u"comboBox")
 
         self.gridLayout_4.addWidget(self.comboBox, 0, 1, 1, 1)

@@ -14,7 +14,7 @@ import os
 import csv
 from PySide6.QtWebEngineWidgets import QWebEngineView
 from PySide6.QtCore import QCoreApplication, QMetaObject, QRect, Qt
-from PySide6.QtWidgets import QGridLayout, QHBoxLayout, QLabel, QListWidget, QListWidgetItem, QPushButton, QSizePolicy, QTextEdit, QVBoxLayout, QWidget
+from PySide6.QtWidgets import QComboBox,QGridLayout, QHBoxLayout, QLabel, QListWidget, QListWidgetItem, QPushButton, QSizePolicy, QTextEdit, QVBoxLayout, QWidget
 from PySide6.QtGui import QMouseEvent
 from service.API_maps import find_address
 from PySide6.QtSql import QSqlDatabase, QSqlQuery, QSqlQueryModel
@@ -32,6 +32,7 @@ class Ui_Form(object):
         self.con.setDatabaseName(os.path.join(os.path.dirname(__file__), "mapsDB.sqlite"))
         self.con.open()
         QSqlQuery("create table if not exists history (name varchar(248))", self.con)
+        
         
         #!Interfaz
         if not Form.objectName():
@@ -53,6 +54,7 @@ class Ui_Form(object):
         self.gridLayout_4 = QGridLayout()
         self.gridLayout_4.setObjectName(u"gridLayout_4")
         self.textEdit_3 = QTextEdit(self.horizontalLayoutWidget)
+        #Cuando se escriba en el textEdit_3 se ejecutara la funcion find_address
         self.textEdit_3.setObjectName(u"textEdit_3")
         sizePolicy = QSizePolicy(
             QSizePolicy.MinimumExpanding, QSizePolicy.Maximum)
@@ -98,14 +100,17 @@ class Ui_Form(object):
 
         self.gridLayout_4.addWidget(self.label_6, 0, 0, 1, 1)
 
-        self.textEdit_4 = QTextEdit(self.horizontalLayoutWidget)
-        self.textEdit_4.setObjectName(u"textEdit_4")
+        
+        
+        self.comboboxname = QComboBox(self.horizontalLayoutWidget)
+        self.comboboxname.addItems(["Badalona", "Barcelona" ,"L'Hospitalet de Llobregat","Sabadell", "Castelldefels"])
+        self.comboboxname.setObjectName(u"comboboxname")
         sizePolicy.setHeightForWidth(
-            self.textEdit_4.sizePolicy().hasHeightForWidth())
-        self.textEdit_4.setSizePolicy(sizePolicy)
-        self.textEdit_4.setLayoutDirection(Qt.LeftToRight)
+            self.comboboxname.sizePolicy().hasHeightForWidth())
+        self.comboboxname.setSizePolicy(sizePolicy)
+        self.comboboxname.setLayoutDirection(Qt.LeftToRight)
 
-        self.gridLayout_4.addWidget(self.textEdit_4, 0, 1, 1, 1)
+        self.gridLayout_4.addWidget(self.comboboxname, 0, 1, 1, 1)
 
         self.verticalLayout_2.addLayout(self.gridLayout_4)
 
@@ -204,10 +209,11 @@ class Ui_Form(object):
         self.retranslateUi(Form)
         #Conectamos los botones con las funciones
         QMetaObject.connectSlotsByName(Form)
+        self.data={}
     
 
     def buscar_direcion(self):
-        city = self.textEdit_4.toPlainText()
+        city = self.comboboxname.currentText()
         street = self.textEdit_3.toPlainText()
         number = self.textEdit.toPlainText()
         floor = self.textEdit_2.toPlainText()
@@ -262,10 +268,24 @@ class Ui_Form(object):
         QSqlQuery("DELETE FROM history", self.con)
 
     def format_form(self):
-        self.textEdit_4.setText("")
+        self.comboboxname.setCurrentIndex(0)
         self.textEdit_3.setText("")
         self.textEdit.setText("")
         self.textEdit_2.setText("")
+
+    def load_csv(self):
+        # cargamos los datos del csv y cogemos los valores de la columna NEXEVIA y la NOMVIA
+        with open('data.csv', 'r') as file:
+            reader = csv.reader(file)
+            next(reader)
+            for row in reader:
+                #CODMUNI;NOMMUNI;TIPUSVIA;NEXEVIA;NOMVIA;NOMCVIA;DATAINFO
+                #agarramos los valores de la columna NEXEVIA y la NOMVIA
+                self.data[row[3]] = row[4]
+                
+        
+            
+
 
     def retranslateUi(self, Form):
         Form.setWindowTitle(QCoreApplication.translate("Form", u"Form", None))
@@ -278,11 +298,11 @@ class Ui_Form(object):
             QCoreApplication.translate("Form", u"Numero", None))
         self.label_6.setText(
             QCoreApplication.translate("Form", u"Ciudad", None))
-        self.textEdit_4.setHtml(QCoreApplication.translate("Form", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        '''self.comboboxname.setHtml(QCoreApplication.translate("Form", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
                                                            "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
                                                            "p, li { white-space: pre-wrap; }\n"
                                                            "</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
-                                                           "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></p></body></html>", None))
+                                                           "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></p></body></html>", None))'''
         self.pushButton_3.setText(
             QCoreApplication.translate("Form", u"Localizar", None))
         self.pushButton_4.setText(
