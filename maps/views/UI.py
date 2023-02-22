@@ -223,7 +223,7 @@ class Ui_Form(object):
 
     def buscar_direcion(self):
         city = self.comboboxname.currentText()
-        street = self.lineEdit_3.toPlainText()
+        street = self.lineEdit_3.text()
         number = self.textEdit.toPlainText()
         floor = self.textEdit_2.toPlainText()
         addres = f"{city} {street} {number} {floor}".lower()
@@ -293,10 +293,9 @@ class Ui_Form(object):
     
     def insert_completion(self, completion):
         # Obtener el cursor actual y el documento de texto
-        cursor = self.lineEdit_3.textCursor()
-        document=self.lineEdit_3.document()
+        cursor = self.lineEdit_3.cursorPosition()
+        document=self.lineEdit_3.text()
         # Obtener la posición del cursor y retroceder para encontrar el inicio de la palabra actual
-        pos=cursor.position()
         cursor.movePosition(QTextCursor.StartOfWord, QTextCursor.MoveAnchor)
         start_pos = cursor.position()
         # Reemplazar la palabra actual con la selección del autocompletado
