@@ -39,7 +39,7 @@ class MainWindow(QMainWindow):
 
     def load_data(self):
         # Cargar los datos del archivo CSV
-        with open('noms-carrer-v1r0-20210702.csv', newline='') as csvfile:
+        with open('datatest.csv', newline='') as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
                 self.data[row['texto']] = row['valor']
