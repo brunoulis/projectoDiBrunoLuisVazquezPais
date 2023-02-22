@@ -15,7 +15,7 @@ import csv
 from PySide6.QtWebEngineWidgets import QWebEngineView
 from PySide6.QtCore import QCoreApplication, QMetaObject, QRect, Qt,QStringListModel
 from PySide6.QtWidgets import QCompleter,QComboBox,QGridLayout, QHBoxLayout, QLabel, QListWidget, QListWidgetItem, QPushButton, QSizePolicy, QTextEdit, QVBoxLayout, QWidget
-from PySide6.QtGui import QMouseEvent,QStandardItemModel,QStandardItem
+from PySide6.QtGui import QMouseEvent,QStandardItemModel,QStandardItem,QTextCursor, QTextDocument, QTextCharFormat
 from service.API_maps import find_address
 from PySide6.QtSql import QSqlDatabase, QSqlQuery, QSqlQueryModel
 from component.map import create_map
@@ -291,7 +291,23 @@ class Ui_Form(object):
             #guardamos los valores de TIPUSVIA,NEXEVIA y NOMVIA en una lista
                 self.data.append( row['TIPUSVIA']+' '+row['NEXEVIA']+' '+row['NOMVIA'])
     
-                
+    def inser_completion(self, completion):
+        # Obtener el cursor actual y el documento de texto
+        cursor = self.textEdit_3.textCursor()
+        document=self.textEdit_3.document()
+        # Obtener la posición del cursor y retroceder para encontrar el inicio de la palabra actual
+        pos=cursor.position()
+        cursor.movePosition(QTextCursor.StartOfWord, QTextCursor.MoveAnchor)
+        start_pos = cursor.position()
+        # Reemplazar la palabra actual con la selección del autocompletado
+        cursor.setPosition(start_pos, QTextCursor.KeepAnchor)
+        cursor.insertText(completion)
+        # Resaltar la palabra completada
+        cursor.movePosition(QTextCursor.EndOfWord, QTextCursor.KeepAnchor)
+        char_format = QTextCharFormat()
+        char_format.setBackground(Qt.yellow)
+        cursor.setCharFormat(char_format)
+        
                 
         
    
