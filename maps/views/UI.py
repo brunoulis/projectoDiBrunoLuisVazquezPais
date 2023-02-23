@@ -14,7 +14,7 @@ import os
 import csv
 from PySide6.QtWebEngineWidgets import QWebEngineView
 from PySide6.QtCore import QCoreApplication, QMetaObject, QRect, Qt,QStringListModel
-from PySide6.QtWidgets import QLineEdit,QCompleter,QComboBox,QGridLayout, QHBoxLayout, QLabel, QListWidget, QListWidgetItem, QPushButton, QSizePolicy, QTextEdit, QVBoxLayout, QWidget
+from PySide6.QtWidgets import QMessageBox,QLineEdit,QCompleter,QComboBox,QGridLayout, QHBoxLayout, QLabel, QListWidget, QListWidgetItem, QPushButton, QSizePolicy, QTextEdit, QVBoxLayout, QWidget
 from PySide6.QtGui import QMouseEvent,QStandardItemModel,QStandardItem,QTextCursor, QTextDocument, QTextCharFormat
 from service.API_maps import find_address
 from PySide6.QtSql import QSqlDatabase, QSqlQuery, QSqlQueryModel
@@ -222,30 +222,32 @@ class Ui_Form(object):
     
 
     def buscar_direcion(self):
-        city = self.comboboxname.currentText()
-        street = self.lineEdit_3.text()
-        number = self.textEdit.toPlainText()
-        floor = self.textEdit_2.toPlainText()
-        addres = f"{city} {street} {number} {floor}".lower()
-
-        layout = QVBoxLayout()
-        self.setLayout(layout)
-
-        m = create_map(find_address(addres))
-        # Guardamos los datos del mapa en un objeto
         
-        data = io.BytesIO()
-        m.save(data, close_file=False)
+            city = self.comboboxname.currentText()
+            street = self.lineEdit_3.text()
+            number = self.textEdit.toPlainText()
+            floor = self.textEdit_2.toPlainText()
+            addres = f"{city} {street} {number} {floor}".lower()
 
-        ubicate = QWebEngineView()
-        ubicate.setHtml(data.getvalue().decode())
-        self.verticalLayout_3.replaceWidget(
-            self.verticalLayout_3.itemAt(1).widget(), ubicate)
+            layout = QVBoxLayout()
+            self.setLayout(layout)
 
-        # Add to the searches list
-        QSqlQuery(f"INSERT INTO history VALUES ('{addres}')")
-        self.llenar_tabla()
+            m = create_map(find_address(addres))
+            # Guardamos los datos del mapa en un objeto
+            
+            data = io.BytesIO()
+            m.save(data, close_file=False)
 
+            ubicate = QWebEngineView()
+            ubicate.setHtml(data.getvalue().decode())
+            self.verticalLayout_3.replaceWidget(
+                self.verticalLayout_3.itemAt(1).widget(), ubicate)
+
+            # Add to the searches list
+            QSqlQuery(f"INSERT INTO history VALUES ('{addres}')")
+            self.llenar_tabla()
+        
+            
 
     def llenar_tabla(self):
         
