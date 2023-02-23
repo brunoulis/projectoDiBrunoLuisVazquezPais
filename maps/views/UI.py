@@ -112,7 +112,7 @@ class Ui_Form(object):
         
         
         self.comboboxname = QComboBox(self.horizontalLayoutWidget)
-        self.comboboxname.addItems(["Badalona", "Barcelona" ,"L'Hospitalet de Llobregat","Sabadell", "Castelldefels"])
+        self.comboboxname.addItems(["Badalona", "Barcelona" ,"Hospitalet de Llobregat","Sabadell", "Castelldefels"])
         self.comboboxname.setObjectName(u"comboboxname")
         sizePolicy.setHeightForWidth(
             self.comboboxname.sizePolicy().hasHeightForWidth())

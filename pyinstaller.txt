@@ -1,0 +1,5 @@
+Aqui ponemos un el comando para que se ejecute el script de python
+donde cogeremos todos los ficheros del projecto y lo convertiremos en una aplicacion ejecutable
+para windows.
+
+pyinstaller --add-data "F:\2DAM\DI\projectoDiBrunoLuisVazquezPais\maps\*;."  --w  __init__.py
