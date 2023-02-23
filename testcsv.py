@@ -8,7 +8,12 @@ with open(pathdata,encoding='utf-8')as archivo:
     datos=csv.DictReader(archivo,delimiter=';')
     for row in datos:
         #guardamos los valores de TIPUSVIA,NEXEVIA y NOMVIA en una lista
-        direcciones.append(row['NOMMUNI']+' '+row['TIPUSVIA']+' '+row['NEXEVIA']+' '+row['NOMVIA'])
+        #"Badalona", "Barcelona" ,"L'Hospitalet de Llobregat","Sabadell", "Castelldefels"
+        if row['NOMMUNI'] == 'Barcelona'or row ['NOMMUNI'] == 'Badalona' or row ['NOMMUNI'] == "L'Hospitalet de Llobregat" or row ['NOMMUNI'] == 'Sabadell' or row ['NOMMUNI'] == 'Castelldefels':
+            direcciones.append(row['NOMMUNI']+' '+row['TIPUSVIA']+' '+row['NEXEVIA']+' '+row['NOMVIA'])
+        
+            
+    
     
 #imprimimos la lista
 for direccion in direcciones:

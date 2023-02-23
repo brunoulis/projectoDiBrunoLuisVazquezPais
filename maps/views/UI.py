@@ -288,8 +288,8 @@ class Ui_Form(object):
             #intentaremos evitar el error unicodeDecodeError: 'charmap' codec can't decode byte 0x81 in position 0: character maps to <undefined>
             datos=csv.DictReader(archivo,delimiter=';')
             for row in datos:
-            #guardamos los valores de TIPUSVIA,NEXEVIA y NOMVIA en una lista
-                self.data.append( row['TIPUSVIA']+' '+row['NEXEVIA']+' '+row['NOMVIA'])
+                if row['NOMMUNI'] == 'Barcelona'or row ['NOMMUNI'] == 'Badalona' or row ['NOMMUNI'] == "L'Hospitalet de Llobregat" or row ['NOMMUNI'] == 'Sabadell' or row ['NOMMUNI'] == 'Castelldefels':
+                    self.data.append( row['TIPUSVIA']+' '+row['NEXEVIA']+' '+row['NOMVIA'])
     
     def insert_completion(self, completion):
         # Obtener el cursor actual y el documento de texto
