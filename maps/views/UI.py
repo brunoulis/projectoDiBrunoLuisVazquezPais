@@ -298,7 +298,7 @@ class Ui_Form(object):
         cursor = self.lineEdit_3.cursorPosition()
         document=self.lineEdit_3.text()
         # Obtener la posición del cursor y retroceder para encontrar el inicio de la palabra actual
-        cursor.movePosition(QTextCursor.StartOfWord, QTextCursor.MoveAnchor)
+        cursor.movePosition(QTextCursor.StartOfWord)
         start_pos = cursor.position()
         # Reemplazar la palabra actual con la selección del autocompletado
         cursor.setPosition(start_pos, QTextCursor.KeepAnchor)
