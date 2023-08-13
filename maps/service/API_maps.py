@@ -2,7 +2,7 @@ import requests
 
 
 API_URL = "https://maps.googleapis.com/maps/api/geocode/json?address="
-API_KEY = "AIzaSyBCsWQFnT-3NO4z7xfxbDceGgmGRjNDUa4"
+API_KEY = "Colocar aqui la API KEY de google maps"
 
 
 def find_address(adress: str) -> dict:
@@ -30,3 +30,4 @@ def find_address(adress: str) -> dict:
         'coordinates': [latitud, longitud],
         'address': adress
     }
+    
