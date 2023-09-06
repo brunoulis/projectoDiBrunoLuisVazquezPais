@@ -13,10 +13,14 @@ Este proyecto de Python utiliza la biblioteca Qt Designer para crear una interfa
 - Autocompletado de calles basado en datos de un archivo CSV.
 - Almacenamiento de datos de direcciones en una base de datos SQLite local.
 
-## Capturas de Pantalla
+## Tecnologías Utilizadas
 
-![Captura de Pantalla 1](screenshots/screenshot1.png)
-_(Agrega capturas de pantalla de tu aplicación aquí)_
+- Python
+- Qt Designer
+- PySide6
+- API de Google Maps
+- SQLite
+
 
 ## Instalación
 
