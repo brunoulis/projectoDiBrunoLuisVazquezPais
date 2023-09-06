@@ -27,7 +27,7 @@ Este proyecto de Python utiliza la biblioteca Qt Designer para crear una interfa
 1. Clona este repositorio en tu máquina local:
 
    ```bash
-   git clone https://github.com/tuusuario/tuproyecto.git
+   git clone https://github.com/brunoulis/proyectoDiBrunoLuisVazquezPais.git
    ```
 
 2. Instala las dependencias utilizando `pip`:
